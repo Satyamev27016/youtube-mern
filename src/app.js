@@ -1,7 +1,8 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-const app = express()
+
+const app = express();
 
 app.use(cors({
     origin:  process.env.CORS_ORIGIN,
@@ -18,8 +19,8 @@ app.use(cors({
 import userRouter from "./routes/user.route.js"
 
 
-//routes declareation
+// routes declareation
 
-  app.use("/api/v1/user", userRouter)
+app.use("/api/v1/users", userRouter)
 
-export default app
+export default app;
