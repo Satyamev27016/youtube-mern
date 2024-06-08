@@ -43,9 +43,10 @@ const registerUser = asyncHandler(async(req ,res) => {
    })
 
    if(exitedUser){
-      throw new ApiError (400, "username or email already taken")
-
+      throw new ApiError (409, "username or email already taken")
    }
+
+   console.log("req.files : ", req.files);
   // check for image , check for avtar  multer give the file
    const avatarLocalPath = req.files?.avatar[0]?.path;
    if(!avatarLocalPath){
@@ -76,7 +77,7 @@ const registerUser = asyncHandler(async(req ,res) => {
       username : username.toLowerCase()
    })
 
-   const createdUser = await User.findById(user._id).select("-password")
+   const createdUser = await User.findById(user._id).select("-password  -refreshToken")
    
    if(!createdUser){
       throw new ApiError(500, "User creation failed")
